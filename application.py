@@ -19,30 +19,35 @@ def predict_datapoint():
 
     if st.button("Predict"):
         if pregnancies and glucose and blood_pressure and skin_thickness and insulin and bmi and diabetes_pedigree_function and age:
-            pregnancies = float(pregnancies)
-            glucose = float(glucose)
-            blood_pressure = float(blood_pressure)
-            skin_thickness = float(skin_thickness)
-            insulin = float(insulin)
-            bmi = float(bmi)
-            diabetes_pedigree_function = float(diabetes_pedigree_function)
-            age = float(age)
-
-            new_data = scaler.transform([[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree_function, age]])
-            prediction = model.predict(new_data)
-
-            if prediction[0] == 1:
-                result = "Diabetic"
+            if not (pregnancies.isdigit() and glucose.isdigit() and blood_pressure.isdigit() and
+                    skin_thickness.isdigit() and insulin.isdigit() and bmi.isdigit() and
+                    diabetes_pedigree_function.replace(".", "", 1).isdigit() and age.isdigit()):
+                st.write("Please enter valid numerical values.")
             else:
-                result = "Non-Diabetic"
+                pregnancies = float(pregnancies)
+                glucose = float(glucose)
+                blood_pressure = float(blood_pressure)
+                skin_thickness = float(skin_thickness)
+                insulin = float(insulin)
+                bmi = float(bmi)
+                diabetes_pedigree_function = float(diabetes_pedigree_function)
+                age = float(age)
 
-            st.write(f"Prediction: {result}")
+                new_data = scaler.transform([[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree_function, age]])
+                prediction = model.predict(new_data)
+
+                if prediction[0] == 1:
+                    result = "Diabetic"
+                else:
+                    result = "Non-Diabetic"
+
+                st.write(f"Prediction: {result}")
+        else:
+            st.write("Please fill in all fields.")
 
 def main():
     st.set_page_config(page_title="Diabetes Prediction App")
     st.title("Diabetes Prediction App")
-
-    
 
     predict_datapoint()
 
