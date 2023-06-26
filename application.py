@@ -42,7 +42,7 @@ def main():
     st.set_page_config(page_title="Diabetes Prediction App")
     st.title("Diabetes Prediction App")
 
-    st.header("Diabetes Prediction")
+    
 
     predict_datapoint()
 
