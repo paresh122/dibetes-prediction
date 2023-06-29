@@ -19,10 +19,10 @@ def predict_datapoint():
 
     if st.button("Predict"):
         if pregnancies and glucose and blood_pressure and skin_thickness and insulin and bmi and diabetes_pedigree_function and age:
-            if not (pregnancies.isdigit() and glucose.isdigit() and blood_pressure.isdigit() and
-                    skin_thickness.isdigit() and insulin.isdigit() and bmi.isdigit() and
-                    diabetes_pedigree_function.replace(".", "", 1).isdigit() and age.isdigit()):
-                st.write("Please enter valid numerical values.")
+            if not (pregnancies.isdigit() and glucose.isdigit() and blood_pressure.isdigit() and skin_thickness.isdigit() and insulin.isdigit() and bmi.replace(".", "", 1).isdigit() and
+            diabetes_pedigree_function.replace(".", "", 1).isdigit() and age.isdigit()):
+                    st.write("Please enter valid numerical values.")
+
             else:
                 pregnancies = float(pregnancies)
                 glucose = float(glucose)
